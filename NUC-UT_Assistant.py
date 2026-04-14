@@ -27,8 +27,7 @@ from google.oauth2.service_account import Credentials
 # ==============================
 if "scope" not in st.session_state:
     st.session_state.scope = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
+    "https://www.googleapis.com/auth/spreadsheets"
 ]
 if "creds" not in st.session_state:
     st.session_state.creds = Credentials.from_service_account_info(
