@@ -426,11 +426,12 @@ def screen_for_toxic_text(prompt):
 # Logging
 # ==============================
 def log_prompt(user_prompt: str, response: str):
-    timestamp = datetime.utcnow().isoformat()  # or datetime.now()
+    timestamp = datetime.utcnow().isoformat()
 
     with open("assets/log.csv", mode="a", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow([timestamp, user_prompt, response])
+        print("logging complete")
 
 # ==============================
 # STREAMLIT UI
