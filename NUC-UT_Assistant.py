@@ -18,6 +18,7 @@ from transformers import AutoTokenizer
 import numpy as np
 import openvino.properties.hint as hints
 from datetime import datetime
+import csv
 
 # ==============================
 # CONFIG
