@@ -421,6 +421,16 @@ def screen_for_toxic_text(prompt):
         return True
     else:
         return False
+        
+# ==============================
+# Logging
+# ==============================
+def log_prompt(user_prompt: str, response: str):
+    timestamp = datetime.utcnow().isoformat()  # or datetime.now()
+
+    with open("assets/log.csv", mode="a", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow([timestamp, user_prompt, response])
 
 # ==============================
 # STREAMLIT UI
@@ -553,6 +563,7 @@ if st.session_state.mode == "qna":
                         ROUTER_PROMPT.format(question=prompt)
                     ).content.strip()
                     print("\n 1. ROUTING DECISION:"+route)
+                    og_prompt = prompt
                     if route == "RAG":
                         prompt = rewrite_query(prompt)
                         st.session_state.tot_api_calls = st.session_state.tot_api_calls+1
@@ -620,6 +631,7 @@ if st.session_state.mode == "qna":
             print("2. NOTIFICATION THAT PROMPT WAS SENT")
             st.session_state.tot_api_calls = st.session_state.tot_api_calls+1
             st.session_state.messages.append({"role": "assistant", "content": answer})
+            log_prompt(og_prompt,answer)
             st.chat_message("assistant").write(answer)
         try:
             if source_docs == [] :
