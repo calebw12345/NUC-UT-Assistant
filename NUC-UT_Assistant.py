@@ -19,10 +19,23 @@ import numpy as np
 import openvino.properties.hint as hints
 from datetime import datetime
 import csv
+import gspread
+from google.oauth2.service_account import Credentials
 
 # ==============================
 # CONFIG
 # ==============================
+scope = ["https://www.googleapis.com/auth/spreadsheets"]
+
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=scope
+)
+
+client = gspread.authorize(creds)
+
+sheet = client.open("llm_prompts_log").sheet1
+
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=OPENAI_API_KEY)
 
