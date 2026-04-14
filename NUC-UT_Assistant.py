@@ -447,7 +447,7 @@ def screen_for_toxic_text(prompt):
 # ==============================
 def log_prompt(prompt, response):
     timestamp = datetime.utcnow().isoformat()
-    sheet.append_row([timestamp, prompt, response])
+    st.session_state.sheet.append_row([timestamp, prompt, response])
 
 # ==============================
 # STREAMLIT UI
