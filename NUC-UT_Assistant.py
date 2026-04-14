@@ -445,13 +445,9 @@ def screen_for_toxic_text(prompt):
 # ==============================
 # Logging
 # ==============================
-def log_prompt(user_prompt: str, response: str):
+def log_prompt(prompt, response):
     timestamp = datetime.utcnow().isoformat()
-
-    with open("assets/log.csv", mode="a", newline="", encoding="utf-8") as file:
-        writer = csv.writer(file)
-        writer.writerow([timestamp, user_prompt, response])
-        print("logging complete")
+    sheet.append_row([timestamp, prompt, response])
 
 # ==============================
 # STREAMLIT UI
