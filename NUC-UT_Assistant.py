@@ -25,16 +25,20 @@ from google.oauth2.service_account import Credentials
 # ==============================
 # CONFIG
 # ==============================
-scope = ["https://www.googleapis.com/auth/spreadsheets"]
+if "scope" not in st.session_state:
+    st.session_state.scope = ["https://www.googleapis.com/auth/spreadsheets"]
 
-creds = Credentials.from_service_account_info(
+if "creds" not in st.session_state:
+    st.session_state.creds = Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope
 )
 
-client = gspread.authorize(creds)
+if "client1" not in st.session_state:
+    st.session_state.client1 = gspread.authorize(creds)
 
-sheet = client.open("llm_prompts_log").sheet1
+if "sheet" not in st.session_state:
+    st.session_state.sheet =  st.session_state.client1.open("llm_prompts_log").sheet1
 
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=OPENAI_API_KEY)
