@@ -31,11 +31,11 @@ if "scope" not in st.session_state:
 if "creds" not in st.session_state:
     st.session_state.creds = Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
-    scopes=scope
+    scopes=st.session_state.scope
 )
 
 if "client1" not in st.session_state:
-    st.session_state.client1 = gspread.authorize(creds)
+    st.session_state.client1 = gspread.authorize(st.session_state.creds)
 
 if "sheet" not in st.session_state:
     st.session_state.sheet =  st.session_state.client1.open("llm_prompts_log").sheet1
