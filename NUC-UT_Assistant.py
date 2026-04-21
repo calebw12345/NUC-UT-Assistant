@@ -28,11 +28,11 @@ if "authenticated" not in st.session_state:
 
 def login():
     st.title("Login")
-
+    username = st.text_input("Enter your provided username", type="username")
     password = st.text_input("Enter access key", type="password")
 
     if st.button("Enter"):
-        if password == st.secrets["APP_KEY"]:
+        if password == st.secrets["APP_KEY"] and if password == st.secrets["USRNAME"]:
             st.session_state.authenticated = True
             st.rerun()
         else:
@@ -342,7 +342,7 @@ if "query_rewriter" not in st.session_state:
 def rewrite_query(user_prompt: str) -> str:
     prompt = f"""
     You are a helpful assistant that rewrites user queries to be clear and precise for document search.
-    Fix spelling errors, clarify intent, and keep numeric values and units intact.
+    Fix spelling errors, clarify intent, and keep numeric values and units intact all while ensuring you are using as minimal verabage as possible, while also ensuring that sufficient verbage is used to obtain an accurate and percise answer.
     
     Original query: "{user_prompt}"
     
