@@ -32,7 +32,7 @@ def login():
     password = st.text_input("Enter access key", type="password")
 
     if st.button("Enter"):
-        if password == st.secrets["APP_KEY"] and if password == st.secrets["USRNAME"]:
+        if password == st.secrets["APP_KEY"] and username == st.secrets["USRNAME"]:
             st.session_state.authenticated = True
             st.rerun()
         else:
