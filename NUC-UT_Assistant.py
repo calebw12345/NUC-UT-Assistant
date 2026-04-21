@@ -28,7 +28,7 @@ if "authenticated" not in st.session_state:
 
 def login():
     st.title("Login")
-    username = st.text_input("Enter your provided username", type="username")
+    username = st.text_input("Enter your provided username")
     password = st.text_input("Enter access key", type="password")
 
     if st.button("Enter"):
