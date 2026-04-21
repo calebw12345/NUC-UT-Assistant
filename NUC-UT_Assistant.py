@@ -22,6 +22,27 @@ import csv
 import gspread
 from google.oauth2.service_account import Credentials
 
+# Initialize session state
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+def login():
+    st.title("Login")
+
+    password = st.text_input("Enter access key", type="password")
+
+    if st.button("Enter"):
+        if password == st.secrets["APP_KEY"]:
+            st.session_state.authenticated = True
+            st.rerun()
+        else:
+            st.error("Invalid key")
+
+# If not authenticated → show login
+if not st.session_state.authenticated:
+    login()
+    st.stop()
+
 # ==============================
 # CONFIG
 # ==============================
