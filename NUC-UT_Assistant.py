@@ -742,6 +742,7 @@ if st.session_state.mode == "qna":
                     source_docs = result["source_documents"]
                 if route == "CONVERSATION":
                         answer = "Sorry, I can only assist with questions related to engineering, ultrasonic testing, nuclear power, or energy. Please ask a relevant question."
+                        source_docs = []
                 else:  # TOOL
                     response = st.session_state.tool_llm.invoke(prompt)
                     st.session_state.tot_api_calls = st.session_state.tot_api_calls+1
