@@ -395,7 +395,6 @@ def speech_to_text(audio_path):
     return transcript.text
 
 def text_to_speech(text, filename="LLM_audio.mp3"):
-
     response = client.audio.speech.create(
         model="tts-1",
         voice="alloy",
@@ -403,10 +402,25 @@ def text_to_speech(text, filename="LLM_audio.mp3"):
         speed=1.5
     )
 
+    audio_bytes = response.read()
+
     with open(filename, "wb") as f:
-        f.write(response.read())
-    play_audio(filename)
+        f.write(audio_bytes)
+
+    st.audio(audio_bytes, format="audio/mp3")
     print(f"🔊 Audio response saved to {filename}")
+    # response = client.audio.speech.create(
+    #     model="tts-1",
+    #     voice="alloy",
+    #     input=text,
+    #     speed=1.5
+    # )
+
+    # with open(filename, "wb") as f:
+    #     f.write(response.read())
+    # play_audio(filename)
+    # print(f"🔊 Audio response saved to {filename}")
+    
 
 # ==============================
 # Detection
