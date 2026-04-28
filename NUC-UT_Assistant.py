@@ -142,7 +142,7 @@ Use TOOL for questions involving:
 - calculations
 
 Return ONLY one word:
-RAG or TOOL or IRRELEVANT
+RAG or TOOL or CONVERSATION
 
 Question:
 {question}
