@@ -130,6 +130,7 @@ Decide whether the user question requires:
 
 RAG  → if the answer requires searching NRC ultrasonic inspection documents
 TOOL → if the question requires ultrasonic calculations.
+IRRELEVANT → if the question does not relate to engineering, ultrasonic testing, nuclear power, or energy.
 
 Use TOOL for questions involving:
 - wavelength
@@ -141,7 +142,7 @@ Use TOOL for questions involving:
 - calculations
 
 Return ONLY one word:
-RAG or TOOL
+RAG or TOOL or IRRELEVANT
 
 Question:
 {question}
@@ -612,7 +613,8 @@ if st.session_state.mode == "qna":
                         print("TOTAL NUMBER OF API CALLS: "+str(st.session_state.tot_api_calls))
                         answer = result["result"]
                         source_docs = result["source_documents"]
-
+                    if route == "IRRELEVANT":
+                        answer = "Sorry, I can only assist with questions related to engineering, ultrasonic testing, nuclear power, or energy. Please ask a relevant question."
                     else:  # TOOL
                         response = st.session_state.tool_llm.invoke(prompt)
                         st.session_state.tot_api_calls = st.session_state.tot_api_calls+1
