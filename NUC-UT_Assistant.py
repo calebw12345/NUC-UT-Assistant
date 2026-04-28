@@ -594,6 +594,7 @@ if st.session_state.mode == "qna":
             toxic_input = screen_for_toxic_text(prompt)
             if toxic_input:
                 answer = "Your message appears to contain potentially toxic or harmful language, so I’m unable to process it as-is but can help if you rephrase it more constructively."
+                og_prompt = prompt
             else:
                 with st.spinner("Thinking..."):
                     route = st.session_state.router_llm.invoke(
